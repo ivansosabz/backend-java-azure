@@ -1,0 +1,17 @@
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.log
+.mvn/wrapper/
+
+.idea/
+*.iml
+
+.env
+application-local.yml
+application-local.properties
+
+.DS_Store
+Thumbs.db
