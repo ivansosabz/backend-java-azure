@@ -38,4 +38,11 @@ public class ClienteService {
         actual.setEmail(datos.getEmail());
         return clienteRepository.save(actual);
     }
+
+    public void eliminar(Long id) {
+        if (!clienteRepository.existsById(id)) {
+            throw new IllegalArgumentException("no existe el cliente con el id " + id);
+        }
+        clienteRepository.deleteById(id);
+    }
 }
