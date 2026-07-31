@@ -30,13 +30,15 @@ public class ClienteService {
         return clienteRepository.save(cliente);
     }
 
-    public ClienteEntity actualizar (Long id, ClienteEntity datos) {
-        ClienteEntity actual = clienteRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("no existe el cliente con el id " + id)
-        );
-        actual.setNombre(datos.getNombre());
-        actual.setEmail(datos.getEmail());
-        return clienteRepository.save(actual);
+    // Actualiza los datos de un cliente. Devuelve Optional.empty() si no existe el id.
+    public Optional<ClienteEntity> actualizar (Long id, ClienteEntity datos) {
+        Optional<ClienteEntity> actual = clienteRepository.findById(id);
+        if (actual.isEmpty()) {
+            return Optional.empty();
+        }
+        actual.get().setNombre(datos.getNombre());
+        actual.get().setEmail(datos.getEmail());
+        return Optional.of(clienteRepository.save(actual.get()));
     }
 
     public void eliminar(Long id) {
